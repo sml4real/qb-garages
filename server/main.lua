@@ -36,12 +36,12 @@ QBCore.Functions.CreateCallback("qb-garage:server:GetOutsideVehicles", function(
     end
 end)
 
-QBCore.Functions.CreateCallback("qb-garage:server:GetUserVehicles", function(source, cb, garage)
+QBCore.Functions.CreateCallback("qb-garage:server:GetUserVehicles", function(source, cb)
     local src = source
     local pData = QBCore.Functions.GetPlayer(src)
 
-    exports.oxmysql:fetch('SELECT * FROM player_vehicles WHERE citizenid = ? AND garage = ?',
-        {pData.PlayerData.citizenid, garage}, function(result)
+    exports.oxmysql:fetch('SELECT * FROM player_vehicles WHERE citizenid = ?',
+        {pData.PlayerData.citizenid}, function(result)
             if result[1] ~= nil then
                 cb(result)
             else
